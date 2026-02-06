@@ -15,6 +15,8 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
+text-align:center;
+padding:20px;
 background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#ffdde1,#ffc3a0);
 background-size:400% 400%;
 animation:bg 10s ease infinite;
@@ -32,6 +34,30 @@ color:white;
 text-shadow:0 0 20px #ff4d88;
 margin-bottom:20px;
 animation:pulse 2s infinite;
+}
+
+.love-card{
+padding:18px 24px;
+max-width:320px;
+background:rgba(255,255,255,.25);
+border-radius:20px;
+backdrop-filter:blur(6px);
+box-shadow:0 12px 35px rgba(255,46,99,.22);
+margin-bottom:24px;
+animation:fadeIn 2s forwards;
+}
+
+.love-icon{
+font-size:2.5rem;
+margin-bottom:10px;
+animation:heartbeat 2s infinite;
+display:inline-block;
+}
+
+@keyframes heartbeat{
+0%,100%{transform:scale(1);}
+30%{transform:scale(1.2);}
+60%{transform:scale(.95);}
 }
 
 @keyframes pulse{
@@ -63,6 +89,8 @@ background:white;
 color:#ff2e63;
 position:absolute;
 font-weight:bold;
+top:55vh;
+left:60vw;
 }
 
 @keyframes bounce{
@@ -161,12 +189,26 @@ text-shadow:0 0 30px #ff2e63;
 display:none;
 animation:fadeIn 3s forwards;
 }
+
+@media (max-width:600px){
+body{padding:40px 16px;}
+h1{font-size:2.2rem;}
+.love-card{padding:16px 18px;margin-bottom:18px;}
+button{padding:12px 26px;font-size:1.1rem;margin:10px;}
+#yesBtn{box-shadow:0 0 18px #ff2e63;}
+#noBtn{top:68vh;left:50vw;}
+#nameSky{font-size:2.6rem;top:8%;}
+}
 </style>
 </head>
 
 <body>
 
 <h1>Will You Be My Valentine? 💕</h1>
+<div class="love-card">
+<div class="love-icon">💌</div>
+<p>Every beat of my heart spells out your smile; stay and unwrap the rest of the surprise.</p>
+</div>
 <button id="yesBtn">Yes 💖</button>
 <button id="noBtn">No 😜</button>
 
