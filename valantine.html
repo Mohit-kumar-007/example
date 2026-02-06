@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever With You 💖</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+height:100vh;
+overflow:hidden;
+font-family:'Segoe UI',sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#ffdde1,#ffc3a0);
+background-size:400% 400%;
+animation:bg 10s ease infinite;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+h1{
+font-size:3rem;
+color:white;
+text-shadow:0 0 20px #ff4d88;
+margin-bottom:20px;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+button{
+padding:15px 40px;
+font-size:1.5rem;
+border:none;
+border-radius:50px;
+cursor:pointer;
+margin:15px;
+transition:.3s;
+}
+
+#yesBtn{
+background:#ff2e63;
+color:white;
+box-shadow:0 0 25px #ff2e63;
+animation:bounce 2s infinite;
+}
+
+#yesBtn:hover{transform:scale(1.2);}
+
+#noBtn{
+background:white;
+color:#ff2e63;
+position:absolute;
+font-weight:bold;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+}
+
+/* Glow Effect */
+.glow{
+animation:screenGlow 2s forwards;
+}
+
+@keyframes screenGlow{
+0%{box-shadow:inset 0 0 0px #fff;}
+100%{box-shadow:inset 0 0 200px #ff4d88;}
+}
+
+/* Hearts */
+.heart{
+position:absolute;
+bottom:-20px;
+font-size:25px;
+animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0) scale(1);opacity:1;}
+100%{transform:translateY(-110vh) scale(1.5);opacity:0;}
+}
+
+/* Confetti */
+.confetti{
+position:absolute;
+top:0;
+font-size:20px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+0%{transform:translateY(0);}
+100%{transform:translateY(110vh);}
+}
+
+/* Firework */
+.firework{
+position:absolute;
+font-size:40px;
+animation:explode 1.5s ease forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(0);}
+50%{transform:scale(1.5);}
+100%{transform:scale(0);opacity:0;}
+}
+
+/* She Said YES */
+#yesText{
+font-size:3rem;
+color:white;
+display:none;
+margin-top:20px;
+animation:fadeIn 2s forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* Love Meter */
+#meterContainer{
+width:300px;
+height:20px;
+background:white;
+border-radius:20px;
+margin-top:20px;
+display:none;
+}
+
+#meter{
+height:100%;
+width:0%;
+background:#ff2e63;
+border-radius:20px;
+transition:.2s;
+}
+
+/* Name in Sky */
+#nameSky{
+position:absolute;
+top:10%;
+font-size:4rem;
+color:white;
+text-shadow:0 0 30px #ff2e63;
+display:none;
+animation:fadeIn 3s forwards;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Will You Be My Valentine? 💕</h1>
+<button id="yesBtn">Yes 💖</button>
+<button id="noBtn">No 😜</button>
+
+<div id="yesText">She Said YES! 💍💖</div>
+
+<div id="meterContainer">
+<div id="meter"></div>
+</div>
+
+<div id="nameSky"></div>
+
+<audio id="bgMusic" loop>
+<source src="romantic-song.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const herName = "Anshu Baby"; // CHANGE HER NAME HERE
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const bgMusic = document.getElementById("bgMusic");
+const yesText = document.getElementById("yesText");
+const meter = document.getElementById("meter");
+const meterContainer = document.getElementById("meterContainer");
+const nameSky = document.getElementById("nameSky");
+
+/* Move No Button */
+document.addEventListener("mousemove", e=>{
+const rect=noBtn.getBoundingClientRect();
+const dist=Math.hypot(e.clientX-rect.left,e.clientY-rect.top);
+if(dist<120){moveNo();}
+});
+noBtn.onclick=()=>{
+noBtn.innerText="💥";
+setTimeout(()=>{noBtn.innerText="No 😜";moveNo();},300);
+}
+function moveNo(){
+noBtn.style.left=Math.random()*(window.innerWidth-100)+"px";
+noBtn.style.top=Math.random()*(window.innerHeight-50)+"px";
+}
+
+/* YES Click */
+yesBtn.onclick=()=>{
+document.body.classList.add("glow");
+bgMusic.play();
+yesText.style.display="block";
+meterContainer.style.display="block";
+nameSky.innerText=herName+" 💖";
+nameSky.style.display="block";
+startHearts();
+startConfetti();
+startFireworks();
+increaseLoveMeter();
+}
+
+/* Heart Rain */
+function startHearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerText="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},200);
+}
+
+/* Confetti */
+function startConfetti(){
+for(let i=0;i<100;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.innerText="🎊";
+c.style.left=Math.random()*100+"vw";
+c.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),4000);
+}
+}
+
+/* Fireworks */
+function startFireworks(){
+for(let i=0;i<10;i++){
+setTimeout(()=>{
+let f=document.createElement("div");
+f.className="firework";
+f.innerText="🎆";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*60+"vh";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1500);
+},i*500);
+}
+}
+
+/* Love Meter */
+function increaseLoveMeter(){
+let width=0;
+let interval=setInterval(()=>{
+if(width>=100){clearInterval(interval);}
+else{
+width++;
+meter.style.width=width+"%";
+}
+},40);
+}
+</script>
+
+</body>
+</html>
